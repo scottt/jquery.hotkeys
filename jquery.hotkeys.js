@@ -33,18 +33,31 @@
 	};
 
 	function keyHandler( handleObj ) {
+                
+		console.log(handleObj);
+
+		if ( typeof handleObj.data === "string" ) {
+			handleObj.data = {
+				combi: handleObj.data,
+				disableInInput: true
+			};
+		}
+
 		// Only care when a possible input has been specified
-		if ( typeof handleObj.data !== "string" ) {
+		if ( typeof handleObj.data !== "object" ||
+			 typeof handleObj.data.combi !== "string" ) {
 			return;
 		}
 		
 		var origHandler = handleObj.handler,
-			keys = handleObj.data.toLowerCase().split(" ");
+			keys = handleObj.data.combi.toLowerCase().split(" "),
+			disableInInput = handleObj.data.disableInInput;
 	
 		handleObj.handler = function( event ) {
 			// Don't fire in text-accepting inputs that we didn't directly bind to
-			if ( this !== event.target && (/textarea|select/i.test( event.target.nodeName ) ||
-				 event.target.type === "text") ) {
+			if ( disableInInput && this !== event.target &&
+				 ( /textarea|select/i.test( event.target.nodeName ) ||
+				   event.target.type === "text" ) ) {
 				return;
 			}
 			

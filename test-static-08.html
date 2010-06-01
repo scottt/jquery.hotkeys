@@ -1,0 +1,44 @@
+
+<html>
+    <head>
+        <style>
+            * {font-family: mono; font-size:0.95em}
+            .eventNotifier{width: 100px; float: left; color:navy; border: dotted 1px navy; padding: 4px; background-color:white; margin:3px}
+            .dirty{border: solid 1px #0ca2ff; color:white; background-color:#0ca2ff}
+            
+        </style>
+    </head>
+    <body>
+        <h3>Test #01</h3>
+        <input type='text' id='input_01'/>
+        <ol>
+            <li>type 'a' - a message should appear</li>
+            <li>type 'b' to focus the text field</li>
+            <li>while focused, type 'c' - a message should appear</li>
+            <li>while focused, type 'a' - no message should appear</li>
+        </ol>
+    <hr />
+    <div id="logger"></div>
+    <script src="jquery-1.4.2.js"></script>
+    <script src="jquery.hotkeys.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(document).bind('keydown', 'a', function() {
+                log("you pressed 'a'");
+            });
+            
+            $(document).bind('keydown', 'b', function() {
+                $('#input_01')[0].focus();
+            });
+
+            $(document).bind('keydown', { combi: 'c', disableInInput: false }, function() {
+                log("you pressed 'c'");
+            });
+
+        });
+
+        function log(msg){
+            $('#logger').html(msg);
+        }
+    </script>
+</html>
