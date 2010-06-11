@@ -33,9 +33,6 @@
 	};
 
 	function keyHandler( handleObj ) {
-                
-		console.log(handleObj);
-
 		if ( typeof handleObj.data === "string" ) {
 			handleObj.data = {
 				combi: handleObj.data,
