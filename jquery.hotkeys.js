@@ -42,6 +42,7 @@
 
 		// Only care when a possible input has been specified
 		if ( typeof handleObj.data !== "object" ||
+			 handleObj.data === null ||
 			 typeof handleObj.data.combi !== "string" ) {
 			return;
 		}
